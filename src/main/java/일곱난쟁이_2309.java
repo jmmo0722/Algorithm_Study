@@ -11,10 +11,12 @@
  * 일곱 난쟁이의 키를 오름차순으로 출력한다. 일곱 난쟁이를 찾을 수 없는 경우는 없다.
  */
 
+// https://www.acmicpc.net/problem/2309
+
 import java.io.*;
 import java.util.*;
 
-public class 일곱난쟁이 {
+public class 일곱난쟁이_2309 {
 
     public static void main(String[] args) throws IOException {
 
