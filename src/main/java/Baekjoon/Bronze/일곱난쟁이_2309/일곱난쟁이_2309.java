@@ -1,6 +1,5 @@
 package Baekjoon.Bronze.일곱난쟁이_2309;
 
-
 import java.io.*;
 import java.util.*;
 
