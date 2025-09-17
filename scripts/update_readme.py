@@ -1,46 +1,37 @@
-# scripts/update_readme.py (src/main/java 구조 인식 최종 버전)
+# scripts/update_readme.py (최종 수정본)
 
 import os
 import re
 from collections import defaultdict
 
-# ----- 여기만 수정되었습니다! -----
-# 검색을 시작할 경로를 'src/main/java'로 정확하게 지정합니다.
+# 검색을 시작할 경로
 SEARCH_DIR = 'src/main/java'
-# --------------------------------
-
-# 무시할 폴더 목록
-IGNORED_DIRS = {'.git', '.github', 'scripts'}
 
 def count_problems():
     stats = defaultdict(int)
     total_count = 0
 
+    # 검색 시작 폴더가 없으면 종료
     if not os.path.isdir(SEARCH_DIR):
-        print(f"'{SEARCH_DIR}' directory not found. Skipping statistics update.")
+        print(f"'{SEARCH_DIR}' directory not found.")
         return stats, total_count
 
-    # 지정된 SEARCH_DIR 부터 탐색 시작
-    for root, dirs, files in os.walk(SEARCH_DIR):
-        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
+    # 1. 플랫폼 폴더 목록을 찾는다 (예: Baekjoon, Programmers)
+    platforms = [d for d in os.listdir(SEARCH_DIR) if os.path.isdir(os.path.join(SEARCH_DIR, d))]
 
-        # SEARCH_DIR를 기준으로 상대 경로를 계산
-        relative_path = os.path.relpath(root, SEARCH_DIR)
+    # 2. 각 플랫폼 폴더를 순회한다
+    for platform in platforms:
+        platform_path = os.path.join(SEARCH_DIR, platform)
 
-        # SEARCH_DIR 자체는 건너뜀 (relative_path가 '.'인 경우)
-        if relative_path == '.':
-            continue
-
-        path_parts = relative_path.split(os.sep)
-
-        # '플랫폼/난이도/문제' (길이 3) 또는 '플랫폼/문제' (길이 2) 구조를 찾음
-        if len(path_parts) >= 2:
+        # 3. 플랫폼 폴더 하위의 모든 폴더를 탐색한다
+        for root, dirs, files in os.walk(platform_path):
+            # 4. 폴더 안에 .java 또는 .md 파일이 있으면 '문제 1개'로 카운트한다
             if any(f.endswith('.java') or f.endswith('.md') for f in files):
-                platform = path_parts[0] # 'Baekjoon' 또는 'Programmers'
                 stats[platform] += 1
                 total_count += 1
-                
-                dirs[:] = [] # 중복 카운트 방지
+
+                # 해당 폴더의 하위는 더 이상 탐색하지 않는다 (중복 방지)
+                dirs[:] = []
 
     return stats, total_count
 
