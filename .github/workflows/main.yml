@@ -1,32 +1,44 @@
+# .github/workflows/main.yml (최종 디버깅 버전)
+
 name: Update README Stats
 
-# main 브랜치에 push 이벤트가 발생했을 때 이 워크플로우를 실행합니다.
 on:
   push:
     branches:
       - main
-      - master # master 브랜치를 사용한다면 이 줄도 추가
+      - master
 
 jobs:
   build:
-    runs-on: ubuntu-latest # 최신 우분투 환경에서 실행
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository # 1. 저장소 코드를 가상 환경으로 내려받습니다.
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python # 2. 파이썬 환경을 설정합니다.
+      - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.x' # 파이썬 3.x 버전 사용
+          python-version: '3.x'
 
-      - name: Run Python script to update README # 3. 작성한 파이썬 스크립트를 실행합니다.
+      - name: Run Python script to update README
         run: python scripts/update_readme.py
 
-      - name: Commit and push if changed # 4. README.md 파일에 변경사항이 있다면 자동 커밋합니다.
+      - name: Commit and push if changed
         run: |
+          echo "--- Checking git status before add ---"
+          git status
+          
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
           git add README.md
-          # 변경사항이 있을 때만 커밋하고 푸시합니다.
-          git diff --quiet --exit-code README.md || (git commit -m "docs: 푼 문제 수 자동 업데이트" && git push)
+          
+          echo "--- Checking git status after add ---"
+          git status
+          
+          # 변경사항이 없더라도 일단 커밋을 시도하고, 실패하면 메시지를 출력합니다.
+          git commit -m "docs: 푼 문제 수 자동 업데이트" || echo "No changes to commit."
+          
+          echo "--- Pushing changes ---"
+          git push
