@@ -1,4 +1,4 @@
-package IM검정대비필수문제.빙고_2578;
+package Baekjoon.Silver.빙고_2578;
 
 
 /**
