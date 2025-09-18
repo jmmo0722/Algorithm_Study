@@ -2,7 +2,7 @@ package Baekjoon.Silver.빙고_2578;
 
 import java.io.*;
 import java.util.*;
-public class 빙고_2578 {
+public class 빙고 {
 
     static Map<Integer, int[]> map;
     static int[][] board;

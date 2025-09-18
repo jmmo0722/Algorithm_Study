@@ -2,7 +2,7 @@ package Baekjoon.Bronze.줄_세우기_2605;
 
 import java.io.*;
 import java.util.*;
-public class 줄_세우기_2605 {
+public class 줄_세우기 {
 
     public static void main(String[] args) throws IOException {
 
