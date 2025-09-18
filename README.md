@@ -18,10 +18,9 @@
 ---
 
 ### 깃 컨벤션
-| Type | Description |
-| :--- | :--- |
-| `feat` | 새로운 문제 풀이 추가 |
-| `fix` | 기존 풀이의 버그 수정 |
-| `docs` | README 등 문서 수정 |
-| `refactor` | 코드 리팩토링 |
-| `chore` | 기타 잡다한 수정 |
+| Type       | Description    |
+|:-----------|:---------------|
+| `feat`     | 문제, 메모리, 시간    |
+| `fix`      | 기존 풀이의 버그 수정   |
+| `docs`     | README 등 문서 수정 |
+| `refactor` | 코드 리팩토링        |
