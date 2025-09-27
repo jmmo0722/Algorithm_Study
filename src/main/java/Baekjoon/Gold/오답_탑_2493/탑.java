@@ -1,4 +1,4 @@
-package Baekjoon.Gold.탑_2493;
+package Baekjoon.Gold.오답_탑_2493;
 
 import java.io.*;
 import java.util.ArrayDeque;
