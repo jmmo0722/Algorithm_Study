@@ -1,4 +1,4 @@
-package Baekjoon.Gold.DFS와BFS_1260;
+package Baekjoon.Silver.DFS와BFS_1260;
 
 import java.io.*;
 import java.util.ArrayDeque;
