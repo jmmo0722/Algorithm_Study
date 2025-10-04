@@ -1,4 +1,4 @@
-package Baekjoon.Silver.수열_2491;
+package Baekjoon.Silver.수열_1446;
 
 import java.io.*;
 import java.util.ArrayList;
